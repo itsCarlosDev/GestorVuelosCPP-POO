@@ -1,0 +1,1 @@
+En aquest directori es mantindran tots els arxius de codi del programa (*.cpp i *.h).

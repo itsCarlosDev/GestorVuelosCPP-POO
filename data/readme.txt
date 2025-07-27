@@ -1,0 +1,1 @@
+Directori on es mantenen els arxius de dades que es manipulen en el programa a implementar a les pràctiques.

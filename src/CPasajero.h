@@ -1,0 +1,7 @@
+class CPasajero{
+
+    public:
+
+    private:
+        
+}
