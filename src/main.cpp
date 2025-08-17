@@ -1,6 +1,10 @@
 
 #include "CVuelo.h"
+#include "CGestorVuelos.h"
 #include <iostream>
+#include <thread>   // std::this_thread::sleep_for
+#include <chrono>   // std::chrono::seconds, std::chrono::milliseconds
+#include <cstdlib>   // system
 
 using namespace std;
 
@@ -9,9 +13,7 @@ using namespace std;
 // ============================
 
 // ✈️ Gestión de vuelos
-// TODO: Implementar función para eliminar un vuelo (eliminarVuelo)
 // TODO: Implementar función para modificar un vuelo (modificarVuelo)
-// TODO: Implementar función para mostrar todos los vuelos actuales (vuelosActuales)
 
 // 📊 Ordenación y búsqueda
 // TODO: Implementar ordenación de vuelos por precio (ordenarPorPrecio)
@@ -48,11 +50,16 @@ using namespace std;
 // TODO: Integrar estructura de lista genérica (CLista<T>)
 // TODO: Implementar sistema de mensajes de error y validación
 
+// Created by AI (ChatGPT)
+void esperar(int segundos) {
+    std::this_thread::sleep_for(std::chrono::seconds(segundos));
+}
+
 void mostrarMenu() {
     cout << "\n=== GESTOR DE VUELOS ===\n";
-    cout << "1. Añadir vuelo\n";
+    cout << "\n1. Añadir vuelo\n";
     cout << "2. Eliminar vuelo\n";
-    cout << "3. Buscar vuelo por ID\n";
+    cout << "3. Modificar vuelo por ID\n";
     cout << "4. Mostrar vuelos actuales\n";
     cout << "5. Ordenar por precio\n";
     cout << "6. Ordenar por duración\n";
@@ -64,15 +71,16 @@ void mostrarMenu() {
 int main(int argc, char const *argv[])
 {
     int opcion; // Menu selection 
-    CVuelo vuelo[10]; // Array, only can be 10 fly's
+    CGestorVuelos gestor;
 
     do {
         mostrarMenu();
         cin >> opcion;
 
+        // The keys {} are to close each case for the variation independence.
         switch (opcion) {
-            case 1:
-                cout << "\n[Añadir vuelo]\n";
+            case 1: {
+                cout << "\n-> Has seleccionado Añadir vuelo\n";
                 int id, dur, prec;
                 cout << "\nIntroduce el ID del vuelo: ";
                 cin >> id;
@@ -80,37 +88,76 @@ int main(int argc, char const *argv[])
                 cin >> dur;
                 cout << "Introduce el precio: ";
                 cin >> prec;
-                vuelo[0].crearVuelo(id, dur, prec); 
+
+                CVuelo vuelo(id, dur, prec);
+                if(gestor.crearVuelo(vuelo)){ cout << "Creado correctamente.\n"; esperar(2); } else{ cout << "Se ha alcanzado el maximo de vuelos posible.\n"; esperar(2);};
+                
                 break;
-            case 2:
-                cout << "[Eliminar vuelo] - Administrador\n";
-                // TODO: Eliminar vuelo
+            }
+            case 2: {
+                int id;
+
+                if(gestor.getnumVuelos() != 0){
+                    cout << "\n-> Has seleccionado Eliminar vuelo\n";
+                    cout << "Introduce el ID del vuelo a eliminar: ";
+                    cin >> id;
+
+                    if(gestor.eliminarVuelo(id)){ cout << "Eliminado correctamente.\n"; esperar(2); } else{ cout << "No hay vuelos a eliminar. \n"; esperar(2);};
+                } else {
+                    cout << "No hay vuelos a eliminar. ";
+                }
                 break;
-            case 3:
-                cout << "[Buscar vuelo por ID]\n";
-                // TODO: Buscar vuelo
+            }
+            case 3: {
+                int id, dur, prec;
+
+                cout << "\n-> Has seleccionado modificar vuelo\n";
+
+                if(gestor.getnumVuelos() != 0){
+                    cout << "Introduce el ID del vuelo a modificar: ";
+                    cin >> id;
+
+                    cout << "Introduce la duración (minutos): ";
+                    cin >> dur;
+                    cout << "Introduce el precio: ";
+                    cin >> prec;
+
+                    CVuelo vuelo(id, dur, prec);
+
+                    if(gestor.modificarVuelos(id, vuelo)){ cout << "Vuelo modificado.\n"; esperar(2); } else{ cout << "No hay vuelos a modificar. \n"; esperar(2);};
+                } else {
+                    cout << "No hay vuelos a modificar. ";
+                }    
                 break;
-            case 4:
-                cout << "[Mostrar vuelos actuales]\n";
-                // TODO: Mostrar vuelos
+            }
+            case 4: {
+                cout << "\n-> Has seleccionado Mostrar vuelos\n";
+                gestor.mostrarVuelos();
+                esperar(3);
                 break;
-            case 5:
+            }
+            case 5: {
                 cout << "[Ordenar por precio]\n";
                 // TODO: Ordenar por precio
                 break;
-            case 6:
+            }
+            case 6: {
                 cout << "[Ordenar por duración]\n";
                 // TODO: Ordenar por duración
                 break;
-            case 7:
+            }
+            case 7: {
                 cout << "[Buscar ruta entre ciudades]\n";
                 // TODO: Buscar ruta
                 break;
-            case 0:
+            }
+            case 0: {
                 cout << "Saliendo del programa...\n";
                 break;
-            default:
+            }
+            default: {
                 cout << "Opción inválida. Inténtalo de nuevo.\n";
+            }
         }
 
     } while (opcion != 0);

@@ -16,5 +16,12 @@ Video: https://youtu.be/oC69vlWofJQ
     - (UI en consola) Creacion de un menu en el main.exe para poder llamar a las funciones, 
     
 
+#Tercera subida, cosas a tener en cuenta
+    - Creacion de la clase CGestorVuelos, esto es para controlar el array desde el gestor de vuelos y no desde los vuelos como tal
+    - Se ha eliminado la funcion creada por inteligencia artificial para realizar una espera en el login de crearVuelo ahora se utiliza en el main.
+    - Implementación de funciones: creacionVuelos, mostrarVuelos, eliminarVuelos, modificarVuelos
+
+#Posibles mejoras
+    - Creacion de la clase CCadena por mi (Ahora esta en uso una version de la universidad UAB)
 
 

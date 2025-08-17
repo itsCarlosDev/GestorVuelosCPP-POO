@@ -1,3 +1,6 @@
+#ifndef CPASAJERO.H
+#define CPASAJERO.H
+
 class CPasajero{
 
     public:
@@ -8,5 +11,7 @@ class CPasajero{
 
 
     private:
-        
-}
+        CPersona pasajero;
+};
+
+#endif
