@@ -12,9 +12,6 @@ using namespace std;
 // TODO LIST - GESTOR DE VUELOS
 // ============================
 
-// ✈️ Gestión de vuelos
-// TODO: Implementar función para modificar un vuelo (modificarVuelo)
-
 // 📊 Ordenación y búsqueda
 // TODO: Implementar ordenación de vuelos por precio (ordenarPorPrecio)
 // TODO: Implementar ordenación de vuelos por duración (ordenarPorDuracion)
