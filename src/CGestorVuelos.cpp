@@ -2,7 +2,6 @@
 #include "CGestorVuelos.h";
 #include <iostream> 
 
-// TODO Se puede mejorar para que el login sea mucho mas seguro
 bool CGestorVuelos::crearVuelo(CVuelo vuelo){
     if(m_numVuelos < 5){
         m_vuelo[m_numVuelos] = vuelo;
@@ -17,17 +16,14 @@ bool CGestorVuelos::eliminarVuelo(int id){
     if(m_numVuelos != 0){
         for(int i=0; i <= m_numVuelos; i++){
             if(m_vuelo[i].getId()==id){
-                if(m_numVuelos > 1){
-                    for(int j=i+1; j <= m_numVuelos; j++){
-                        m_vuelo[j].setDuracion(m_vuelo[j-1].getDuracion());
-                        m_vuelo[j].setId(m_vuelo[j-1].getId());
-                        m_numVuelos--;
-                    }
-                } else {
-                    m_numVuelos--;
+                for(int j=i+1; j < m_numVuelos; j++){
+                    m_vuelo[j-1].setDuracion(m_vuelo[j].getDuracion());
+                    m_vuelo[j-1].setId(m_vuelo[j].getId());
+                    m_vuelo[j-1].setPrecio(m_vuelo[j].getPrecio());
                 }
             }
         }
+        m_numVuelos--;
         return true;
     } else {
         return false;
@@ -75,33 +71,107 @@ void CGestorVuelos::buscarporID(int id){
     }
 }
 
-void CGestorVuelos::ordenarPorID(){
-    int id, duracion, precio;
+//TODO se podria tener un template para evitar tener tantos ordenar...
+
+bool CGestorVuelos::ordenarPorID(){
+    int indexMin;
     int suma, posicion;
 
-    id = m_vuelo[0].getId();
-    duracion = m_vuelo[0].getDuracion();
-    precio = m_vuelo[0].getPrecio();
+    CVuelo vuelo_temp;
 
-    if(m_numVuelos >= 1){
-        for(int i=1; i<m_numVuelos; i++){
-            if(suma != m_numVuelos){
-                if(m_vuelo[i].getId()<id){
-                    id = m_vuelo[i].getId();
-                    duracion = m_vuelo[i].getDuracion();
-                    precio = m_vuelo[i].getPrecio();
-                } else {
-                    suma++;
+    posicion = 0;
+
+    if(m_numVuelos > 1) // Tiene que haber 1 minimo
+    { 
+        do
+        {
+            indexMin = posicion;
+            for(int i = posicion + 1; i < m_numVuelos; ++i) // Empieza por segunda posicion
+            { 
+                if(m_vuelo[i].getId()<m_vuelo[indexMin].getId()) // Si es el id de la siguiente posicion mas grande que la anterior, se guarda.
+                { 
+                    indexMin = i;
                 }
-            } else {
-                m_vuelo[posicion].setId(id);
-                m_vuelo[posicion].setDuracion(duracion);
-                m_vuelo[posicion].setPrecio(precio);
-                posicion++;
-                id = m_vuelo[posicion].getId();
-                suma =0;
             }
-        }
-        
+
+            vuelo_temp = m_vuelo[posicion];
+            m_vuelo[posicion] = m_vuelo[indexMin];
+            m_vuelo[indexMin] = vuelo_temp;
+
+            posicion++; // Pasamos a la siguiente
+
+        } while (posicion != m_numVuelos);
+        return true;
+    } else {
+        return false;
     }
+}
+
+bool CGestorVuelos::ordenarPorPrecio(){
+
+    int posicion = 0;
+    int MinIndex = 0;
+
+    CVuelo vuelo_temp;
+    
+    if(m_numVuelos > 1) // Tiene que haber 1 minimo
+    { 
+        do
+        {
+            MinIndex = posicion;
+            for (int i = posicion + 1; i < m_numVuelos; i++)
+            {
+                if (m_vuelo[i].getPrecio() < m_vuelo[MinIndex].getPrecio())
+                {
+                    MinIndex = i;
+                }
+                
+            }
+
+            vuelo_temp = m_vuelo[posicion];
+            m_vuelo[posicion] = m_vuelo[MinIndex];
+            m_vuelo[MinIndex] = vuelo_temp;
+
+            posicion++;
+            
+        } while (posicion != m_numVuelos);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool CGestorVuelos::ordenarPorDuracion(){
+
+    int posicion = 0;
+    int MinIndex = 0;
+
+    CVuelo vuelo_temp;
+
+    if(m_numVuelos > 1) // Tiene que haber 1 minimo
+    {
+        do
+        {
+            MinIndex = posicion;
+            for (int i = posicion + 1; i < m_numVuelos; i++)
+            {
+                if (m_vuelo[i].getDuracion() < m_vuelo[MinIndex].getDuracion())
+                {
+                    MinIndex = i;
+                }
+                
+            }
+
+            vuelo_temp = m_vuelo[posicion];
+            m_vuelo[posicion] = m_vuelo[MinIndex];
+            m_vuelo[MinIndex] = vuelo_temp;
+
+            posicion++;
+            
+        } while (posicion != m_numVuelos);
+        return true;
+    } else {
+        return false;
+    }
+    
 }

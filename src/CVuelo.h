@@ -24,13 +24,13 @@ class CVuelo
         }
 
         /* Setters */
-        int setId(int id){
+        void setId(int id){
             m_IDVuelo = id;
         }
-        int setDuracion(int duracion){
+        void setDuracion(int duracion){
             m_duracion = duracion;
         }
-        int setPrecio(int precio){
+        void setPrecio(int precio){
             m_precio = precio;
         }
 

@@ -12,7 +12,10 @@ class CGestorVuelos
         bool eliminarVuelo(int id);
         void buscarporID(int id);
         void mostrarVuelos();
-        void ordenarPorID();
+
+        bool ordenarPorID();
+        bool ordenarPorPrecio();
+        bool ordenarPorDuracion();
 
         /* Getters */
         int getnumVuelos(){

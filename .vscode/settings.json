@@ -4,6 +4,9 @@
     "files.associations": {
         "iostream": "cpp",
         "type_traits": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "random": "cpp",
+        "text_encoding": "cpp",
+        "thread": "cpp"
     }
 }

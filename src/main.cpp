@@ -8,45 +8,6 @@
 
 using namespace std;
 
-// ============================
-// TODO LIST - GESTOR DE VUELOS
-// ============================
-
-// 📊 Ordenación y búsqueda
-// TODO: Implementar ordenación de vuelos por precio (ordenarPorPrecio)
-// TODO: Implementar ordenación de vuelos por duración (ordenarPorDuracion)
-// TODO: Implementar búsqueda de vuelo por ID (buscarVueloPorID)
-
-// 🌍 Rutas y conexiones
-// TODO: Implementar búsqueda de ruta entre origen y destino (buscarRuta)
-// TODO: Implementar visualización de todas las rutas (mostrarRutas)
-// TODO: Implementar algoritmo DFS para recorridos de rutas (DFS)
-
-// 👨‍✈️ Gestión de pilotos
-// TODO: Implementar visualización de experiencia del piloto (getExperiencia)
-// TODO: Implementar visualización de cantidad de vuelos del piloto (getVuelos)
-// TODO: Implementar asignación de piloto a avión
-
-// 🧍 Gestión de pasajeros y acompañantes
-// TODO: Implementar inserción de pasajero (CPasajero)
-// TODO: Implementar gestión de clase del pasajero (Business/Normal)
-// TODO: Implementar asignación de acompañantes al pasajero (m_Acompanantes)
-
-// 🧾 Gestión de personas
-// TODO: Implementar obtención de nombre de persona (getNombre)
-// TODO: Implementar obtención de teléfono de persona (getTelefono)
-// TODO: Implementar obtención de DNI de persona (getDNI)
-
-// 🛫 Gestión de aviones
-// TODO: Implementar visualización de datos de avión (capacidad, velocidad, ID)
-// TODO: Implementar asignación de avión a piloto
-
-// 🔧 Utilidades generales
-// TODO: Implementar estructura de menú en consola (main menu + submenús)
-// TODO: Validar entradas de usuario (fechas, ID, clase, etc.)
-// TODO: Integrar estructura de lista genérica (CLista<T>)
-// TODO: Implementar sistema de mensajes de error y validación
-
 // Created by AI (ChatGPT)
 void esperar(int segundos) {
     std::this_thread::sleep_for(std::chrono::seconds(segundos));
@@ -58,9 +19,9 @@ void mostrarMenu() {
     cout << "2. Eliminar vuelo\n";
     cout << "3. Modificar vuelo por ID\n";
     cout << "4. Mostrar vuelos actuales\n";
-    cout << "5. Ordenar por precio\n";
-    cout << "6. Ordenar por duración\n";
-    cout << "7. Buscar ruta entre ciudades\n";
+    cout << "5. Ordenar por id\n";
+    cout << "6. Ordenar por precio\n";
+    cout << "7. Ordenar por duracion\n";
     cout << "0. Salir\n";
     cout << "\nSelecciona una opción: ";
 }
@@ -134,18 +95,24 @@ int main(int argc, char const *argv[])
                 break;
             }
             case 5: {
-                cout << "[Ordenar por precio]\n";
-                // TODO: Ordenar por precio
+                cout << "\n-> Has seleccionado ordenar vuelos por ID\n";
+                if(gestor.ordenarPorID()){ cout << "Vuelos organizados por ID.\n"; esperar(2); } else{ cout << "No hay vuelos a organizar/Solo hay un vuelo \n"; esperar(2);};
+                gestor.mostrarVuelos();
+                esperar(2);
                 break;
             }
             case 6: {
-                cout << "[Ordenar por duración]\n";
-                // TODO: Ordenar por duración
+                cout << "\n-> Has seleccionado ordenar vuelos por precio\n";
+                if(gestor.ordenarPorPrecio()){ cout << "Vuelos organizados por Precio.\n"; esperar(2); } else{ cout << "No hay vuelos a organizar/Solo hay un vuelo \n"; esperar(2);};
+                gestor.mostrarVuelos();
+                esperar(2);
                 break;
             }
             case 7: {
-                cout << "[Buscar ruta entre ciudades]\n";
-                // TODO: Buscar ruta
+                cout << "\n-> Has seleccionado ordenar vuelos por duracion\n";
+                if(gestor.ordenarPorDuracion()){ cout << "Vuelos organizados por Duracion.\n"; esperar(2); } else{ cout << "No hay vuelos a organizar/Solo hay un vuelo \n"; esperar(2);};
+                gestor.mostrarVuelos();
+                esperar(2);
                 break;
             }
             case 0: {
