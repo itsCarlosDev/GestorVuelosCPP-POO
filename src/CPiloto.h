@@ -1,9 +1,37 @@
-class CPiloto{
+
+#ifndef CPILOTO_H
+#define CPILOTO_H
+
+#include "CPersona.h"
+
+class CPiloto
+{
     public:
 
-    // Getters i Setters
+    // Constructor por defecto
+    CPiloto() : m_IDPiloto(0), m_experiencia(0) {}
+
+    // Getters
+    int getExperiencia(){ return m_experiencia; }
+    int getID() const { return m_IDPiloto; }
+    CCadena getNombre() const { return piloto.getNombre(); }
+
+    // Setters
+    void setExperiencia(int experiencia){ m_experiencia = experiencia; }
+    void setPersona(CPersona& persona) { piloto = persona; }
+    void setID(int id) { m_IDPiloto = id; }
+
+    CPiloto& operator=(const CPiloto& copia);
+    // Colocar friend delante del operador permite 
+    // acceder a los datos privados
+
+    friend ostream& operator<<(std::ostream& out, const CPiloto& piloto);
 
     private:
+        CPersona piloto;
+        int m_IDPiloto;
         int m_experiencia;
-        int m_vuelos;
-}
+
+};
+
+#endif

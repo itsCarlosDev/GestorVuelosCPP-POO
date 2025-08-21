@@ -3,26 +3,26 @@
 
 #include "CCadena.h"
 
-class CPersona{
-
+class CPersona
+{
     public:
 
-    // Getters and Setters
-    CCadena get_nombre(){
-		return m_nombre;
-	}
-    int get_edad() {
-        return m_edad;
-    }
-    int get_dni() {
-        return m_dni;
-    }
+    CPersona(CCadena nombre, int dni);
+    CPersona();
+
+    /* Getters */
+    // Se ha añadido constante para hacer funcionar la sobrecarga
+    // del operador =, ya que este es constante.
+    CCadena getNombre() const { return m_nombre; }
+    int getDni() const { return m_dni; }
+
+    /* Setters */
+    void setDNI(int dni) { m_dni = dni; }
+    void setNombre(CCadena nombre) { m_nombre = nombre; }
 
     private:
         CCadena m_nombre;
-        int m_edad;
         int m_dni;
-
-}
+};
 
 #endif

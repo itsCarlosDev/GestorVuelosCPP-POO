@@ -1,1 +1,3 @@
-obj/main.o: src/main.cpp src/CVuelo.h src/CCadena.h src/CGestorVuelos.h
+obj/main.o: src/main.cpp src/CVuelo.h src/CCadena.h src/CAvion.h \
+ src/CPasajero.h src/CPersona.h src/CPiloto.h src/CGestorVuelos.h \
+ src/CGestorPilotos.h
