@@ -1,5 +1,5 @@
-#ifndef CPERSONA.H
-#define CPERSONA.H
+#ifndef CPERSONA_H
+#define CPERSONA_H
 
 #include "CCadena.h"
 

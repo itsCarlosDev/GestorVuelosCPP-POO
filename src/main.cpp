@@ -4,6 +4,7 @@
 #include "CPersona.h"
 #include "CPasajero.h"
 #include "CGestorPilotos.h"
+#include "CGestorAviones.h"
 #include <iostream>
 #include <thread>   // std::this_thread::sleep_for
 #include <chrono>   // std::chrono::seconds, std::chrono::milliseconds
@@ -30,26 +31,26 @@ void mostrarMenu() {
     cout << "\n=== GESTOR DE PILOTOS ===\n";
     cout << "\n8. Añadir Piloto\n";
     cout << "9. Mostrar Pilotos\n";
-    cout << "10. Eliminar piloto\n";
-    cout << "11. Modificar piloto por DNI\n";
+    //cout << "10. Eliminar piloto\n";
+    //cout << "11. Modificar piloto por DNI\n";
 
     /*cout << "\n=== GESTOR DE CLIENTES ===\n";
     cout << "\n8. Añadir Pasajero\n";
     cout << "9. Eliminar pasajero\n";
-    cout << "10. Modificar pasajero por DNI\n";
+    cout << "10. Modificar pasajero por DNI\n";*/
 
     cout << "\n=== GESTOR DE AVIONES ===\n";
-    cout << "\n14. Añadir Avion\n";
-    cout << "15. Eliminar piloto\n";
-    cout << "16. Modificar piloto por DNI\n";*/
+    cout << "\n12. Añadir Avion\n";
+    cout << "13. Mostrar Aviones\n";
+    //cout << "16. Modificar piloto por DNI\n";
 
-    cout << "0. Salir\n";
+    cout << "\n0. Salir\n";
     cout << "\nSelecciona una opción: ";
 }
 
 int main(int argc, char const *argv[])
 {
-    int opcion, plantillaPilotos; // Menu selection 
+    int opcion, plantillaPilotos, avionesTotales; // Menu selection 
     CGestorVuelos gestor;
     CPasajero pasajero;
 
@@ -57,6 +58,10 @@ int main(int argc, char const *argv[])
     cout << "Introduce el numero de plantilla de Pilotos del Aeropuerto: ";
     cin >> plantillaPilotos;
     CGestorPilotos pilotos(plantillaPilotos);
+
+    cout << "Introduce el numero de aviones que caben en el aeropuerto: ";
+    cin >> avionesTotales;
+    CGestorAviones aviones(avionesTotales);
 
     do {
         mostrarMenu();
@@ -71,18 +76,19 @@ int main(int argc, char const *argv[])
                     
                     /* Entrada de datos sobre el vuelo. */
                     int id, dur, prec;
+                    string origen, destino;
                     cout << "\nIntroduce el ID del vuelo: ";
                     cin >> id;
+                    cout << "Coloca el origen del vuelo: ";
+                    cin >> origen;
+                    cout << "Coloca el destino del vuelo: ";
+                    cin >> destino;
                     cout << "Introduce la duración (minutos): ";
                     cin >> dur;
                     cout << "Introduce el precio: ";
                     cin >> prec;
 
                     int idAvion, idPiloto1, idPiloto2, maxPasajeros;
-                    /*cout << "Indica el ID del avion asignado: ";
-                    cin >> idAvion;
-                    cout << "Indica el maximo de pasajeros: ";
-                    cin >> maxPasajeros;*/
 
                     /* Asignacion de pilotos al vuelo */
                     bool encontradoUno = false;
@@ -119,7 +125,27 @@ int main(int argc, char const *argv[])
                         }
                     } while (encontradoDos == false);
 
-                    CVuelo vuelo(id, dur, prec, maxPasajeros, piloto1, piloto2);
+                    cout << "Indica el ID del avion asignado: ";
+                    cin >> idAvion;
+
+                    bool encontradoTres = false;
+                    CAvion avion;
+
+                    do
+                    {
+                        cout << "Indica el ID del avion: ";
+                        cin >> idAvion;
+                        if(aviones.encontrarAvion(idAvion)){
+                            cout << "¡Avion encontrado! \n";
+                            avion = aviones.buscarporID(idAvion);
+                            encontradoTres = true;
+                        } else {
+                            cout << "No se ha encontrado el avion. \n";
+                            encontradoTres = false;
+                        }
+                    } while (encontradoTres == false);
+
+                    CVuelo vuelo(origen, destino, id, dur, prec, maxPasajeros, piloto1, piloto2, avion);
 
                     /* Creacion del vuelo */
                     if(gestor.crearVuelo(vuelo)){ cout << "Creado correctamente.\n"; esperar(2); } else{ cout << "Se ha alcanzado el maximo de vuelos posible.\n"; esperar(2);};
@@ -155,6 +181,12 @@ int main(int argc, char const *argv[])
                     cin >> dur;
                     cout << "Introduce el precio: ";
                     cin >> prec;
+
+                    string origen, destino;
+                    cout << "Coloca el origen del vuelo: ";
+                    cin >> origen;
+                    cout << "Coloca el destino del vuelo: ";
+                    cin >> destino;
 
                     int idAvion, idPiloto1, idPiloto2, maxPasajeros;
                     cout << "Indica el ID del 1º Piloto: ";
@@ -195,7 +227,27 @@ int main(int argc, char const *argv[])
                         }
                     } while (encontradoDos == false);
 
-                    CVuelo vuelo(id, dur, prec, maxPasajeros, piloto1, piloto2);
+                    cout << "Indica el ID del avion asignado: ";
+                    cin >> idAvion;
+
+                    bool encontradoTres = false;
+                    CAvion avion;
+
+                    do
+                    {
+                        cout << "Indica el ID del avion: ";
+                        cin >> idAvion;
+                        if(aviones.encontrarAvion(idAvion)){
+                            cout << "¡Avion encontrado! \n";
+                            avion = aviones.buscarporID(idAvion);
+                            encontradoTres = true;
+                        } else {
+                            cout << "No se ha encontrado el avion. \n";
+                            encontradoTres = false;
+                        }
+                    } while (encontradoTres == false);
+
+                    CVuelo vuelo(origen, destino, id, dur, prec, maxPasajeros, piloto1, piloto2, avion);
 
                     if(gestor.modificarVuelos(id, vuelo)){ cout << "Vuelo modificado.\n"; esperar(2); } else{ cout << "No hay vuelos a modificar. \n"; esperar(2);};
                 } else {
@@ -285,16 +337,24 @@ int main(int argc, char const *argv[])
                 break;
             }
             case 12: {
-                cout << "\n-> Has seleccionado ordenar vuelos por duracion\n";
-                if(gestor.ordenar(&CVuelo::getDuracion)){ cout << "Vuelos organizados por Duracion.\n"; esperar(2); } else{ cout << "No hay vuelos a organizar/Solo hay un vuelo \n"; esperar(2);};
-                gestor.mostrarVuelos();
+                cout << "\n-> Has seleccionado crear Avion\n";
+
+                int maxPasajeros, id;
+
+                cout << "Indica el ID del avion: ";
+                cin >> id;
+
+                cout << "Indica el maximo de pasajeros: ";
+                cin >> maxPasajeros;
+
+                CAvion avion(id, maxPasajeros);
+                
                 esperar(2);
                 break;
             }
             case 13: {
-                cout << "\n-> Has seleccionado ordenar vuelos por duracion\n";
-                if(gestor.ordenar(&CVuelo::getDuracion)){ cout << "Vuelos organizados por Duracion.\n"; esperar(2); } else{ cout << "No hay vuelos a organizar/Solo hay un vuelo \n"; esperar(2);};
-                gestor.mostrarVuelos();
+                cout << "\n-> Has seleccionado mostrar Aviones\n";
+                aviones.mostrarAviones();
                 esperar(2);
                 break;
             }

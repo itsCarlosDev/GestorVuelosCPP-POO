@@ -28,7 +28,8 @@ class CPiloto
     friend ostream& operator<<(std::ostream& out, const CPiloto& piloto);
 
     private:
-        CPersona piloto;
+        CPersona piloto; // Composicion, de esta manera CPiloto no es un CPersona ** No hay polimorfismo **
+        // Seria necesario tener polimorfismo si juntara a las personas, si tubiera pilotos y pasajeros juntos
         int m_IDPiloto;
         int m_experiencia;
 

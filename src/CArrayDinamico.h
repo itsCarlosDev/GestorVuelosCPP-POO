@@ -6,7 +6,7 @@
 #include <vector> // Implementa un array dinamico
 // Permite gestionar la memoria de manera dinamica y usar new y delete
 
-/* Funciones que añade */
+/* Funciones que añade <vector>*/
 
 // push_back(x) → mete un elemento al final.
 // erase(it) → borra el elemento en la posición del iterador.
@@ -27,7 +27,7 @@ public:
     int tamano(); // Sin la Ñ ya que puede dar problemas de compilación
 
 private:
-    std::vector<T> elementos; // Creacion del array dinamico
+    vector<T> elementos; // Creacion del array dinamico
 
 };
 

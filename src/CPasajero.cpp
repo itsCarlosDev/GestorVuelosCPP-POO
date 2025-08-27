@@ -1,4 +1,10 @@
 
-#include "CPasajero.h";
+#include "CPasajero.h"
 
-// void 
+CPasajero& CPasajero::operator=(const CPasajero& copia){
+    if(this != &copia){
+        this->pasajero.setDNI(copia.pasajero.getDni());
+        this->pasajero.setNombre(copia.pasajero.getNombre());
+    }
+    return *this;
+}
