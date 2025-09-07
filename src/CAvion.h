@@ -22,9 +22,9 @@ class CAvion{
 
         /* Setters */
         void setIDAvion(int id) { m_IDAvion = id; }
-        void setMaxPasajeros(int max) { m_maxPasajeros = max }
+        void setMaxPasajeros(int max) { m_maxPasajeros = max; }
 
-        CAvion& operator=(const CAvion& copia);
+        //CAvion& operator=(const CAvion& copia);
         friend ostream& operator<<(std::ostream& out, const CAvion& avion);
 
     private: 

@@ -5,14 +5,14 @@
 // si a es diferente de b (this es a, b es el objeto copia)
 
 CPiloto& CPiloto::operator=(const CPiloto& copia){
-    if (this != &copia) {           // Evitar auto‑asignación
+    if (this != &copia) { // Evitar auto‑asignación
         // Copiamos los miembros de CPiloto
         this->m_experiencia = copia.m_experiencia;
         this->m_IDPiloto = copia.m_IDPiloto;
         
         // Copiamos la persona asociada
-        this->piloto.setDNI(copia.piloto.getDni());
-        this->piloto.setNombre(copia.piloto.getNombre());
+        this->setDNI(copia.getDni());
+        this->setNombre(copia.getNombre());
     }
     return *this;   
 }
@@ -20,9 +20,9 @@ CPiloto& CPiloto::operator=(const CPiloto& copia){
 ostream& operator<<(std::ostream& out, const CPiloto& piloto)
 {
     out << "-> Piloto con ID: " << piloto.m_IDPiloto << "\n"
-        << "- Nombre: " << piloto.piloto.getNombre() << "\n"
+        << "- Nombre: " << piloto.getNombre() << "\n"
         << "- Experiencia: " << piloto.m_experiencia << " años\n"
-        << "- DNI: " << piloto.piloto.getDni()
+        << "- DNI: " << piloto.getDni()
         ;
     return out;
 }

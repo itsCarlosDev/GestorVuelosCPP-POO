@@ -15,7 +15,7 @@ CGestorAviones::~CGestorAviones(){
     delete m_aviones;
 }
 
-/*
+
 bool CGestorAviones::crearAvion(int id, int maxPasajeros){
     CAvion avion;
     CPasajero pasajero;
@@ -30,27 +30,6 @@ bool CGestorAviones::crearAvion(int id, int maxPasajeros){
         return false;
     }
     
-}*/
-
-bool CGestorPilotos::crearPiloto(const CCadena& nombre, int dni, int experiencia, int ID){
-    CPiloto piloto;
-    CPersona persona;
-
-    if(m_numPilotosActuales < m_numPlantilla){
-        persona.setDNI(dni);
-        persona.setNombre(nombre);
-
-        piloto.setExperiencia(experiencia);
-        piloto.setPersona(persona);
-        piloto.setID(ID);
-
-        m_piloto[m_numPilotosActuales] = piloto;
-        m_numPilotosActuales++;
-
-        return true;
-    } else {
-        return false;
-    }
 }
 
 bool CGestorAviones::encontrarAvion(int id){
@@ -63,8 +42,9 @@ bool CGestorAviones::encontrarAvion(int id){
     return false;
 }
 
-// Siempre se encontrara el piloto ya que antes hacemos encontrarPiloto() en el main el cual
-// si el piloto no existe devuelve un false y avisa al usuario.
+// Siempre se encontrara el piloto ya que antes hacemos 
+// encontrarPiloto() en el main el cual si el piloto no 
+// existe devuelve un false y avisa al usuario.
 
 CAvion CGestorAviones::buscarporID(int id){
     for (int i = 0; i < m_cantidadActualAviones; i++)

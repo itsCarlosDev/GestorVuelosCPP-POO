@@ -3,8 +3,8 @@
 
 CPasajero& CPasajero::operator=(const CPasajero& copia){
     if(this != &copia){
-        this->pasajero.setDNI(copia.pasajero.getDni());
-        this->pasajero.setNombre(copia.pasajero.getNombre());
+        this->setDNI(copia.getDni());
+        this->setNombre(copia.getNombre());
     }
     return *this;
 }

@@ -7,16 +7,17 @@
 class CGestorAviones
 {
     public:
+        /*Constructor y destructor*/
         CGestorAviones(int maxAviones);
         ~CGestorAviones();
 
+        /*Funciones*/
         bool crearAvion(int id, int maxPasajeros);
         void mostrarAviones();
-
         bool encontrarAvion(int id);
         CAvion buscarporID(int id);
 
-        /* Getters */
+        /*Getters*/
         int getCantidadActual() { return m_cantidadActualAviones; }
         int getID() { return m_aviones->getIDAvion(); }
         

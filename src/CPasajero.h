@@ -2,10 +2,15 @@
 #define CPASAJERO_H
 
 #include "CPersona.h"
+#include "CClase.h"
+#include <list>
 
-class CPasajero{
+class CPasajero : public CPersona
+{
 
     public:
+
+        
 
         // Un puntero (CPersona*) no es lo mismo que una instancia (CPersona).
         // - Con un puntero, se usa "->" para acceder a métodos/atributos: pasajero->getNombre()
@@ -13,14 +18,8 @@ class CPasajero{
 
         CPasajero& operator=(const CPasajero& copia);
 
-        CCadena getNombre() const { return pasajero.getNombre(); }
-        int getDni() const { return pasajero.getDni(); }
-
-        void setDNI(int dni) { pasajero.setDNI(dni); }
-        void setNombre(CCadena nombre) { pasajero.setNombre(nombre); }
-
     private:
-        CPersona pasajero;
+        std::list<CClase> m_clase;
 };
 
 #endif

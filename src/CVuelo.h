@@ -10,8 +10,7 @@ class CVuelo
     public:
         
         CVuelo();
-        CVuelo(string origen, string destino ,int id, int Duracion, int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion); // Constructor con parametros
-        //~CVuelo(); // Destructor
+        CVuelo(CCadena origen, CCadena destino ,int id, int Duracion, int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion); // Constructor con parametros
 
         /* Getter's */
         int getId(){ return m_IDVuelo; }
@@ -24,24 +23,16 @@ class CVuelo
         void setPrecio(int precio){ m_precio = precio; }
 
     private:
+        CCadena m_origen;
+        CCadena m_destino;
         int m_IDVuelo;
         int m_duracion;
         int m_precio;
-        
-        //CCadena m_origen;
-        //CCadena m_destino;
         //CFecha m_fechaSalida;
         //CHora m_horaSalida;
-
-        CPiloto m_pilotos[2]; // Dos pilotos fijos
-
-        CPasajero* pasajeros = nullptr; // Array reservado
+        CPiloto m_pilotos[2]; // Solo pueden haber 2 pilotos por avion
         int m_numMaxPasajeros;
-
         CAvion avionAsignado;
-
-        string m_origen;
-        string m_destino;
         
     friend std::ostream& operator<<(std::ostream&, const CVuelo&);
 };

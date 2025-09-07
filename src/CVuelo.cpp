@@ -3,21 +3,16 @@
 
 CVuelo::CVuelo()
 {
-    // Mejorar el constructor por defecto CVuelo ya que tener dos objetos asi no esta bien.
-    CPiloto piloto1;
-    CPiloto piloto2;
-    CAvion avion; 
-
     m_IDVuelo = 0;
     m_duracion = 0;
     m_precio = 0;
     m_numMaxPasajeros = 0;
-    m_pilotos[0] = piloto1;
-    m_pilotos[1] = piloto2;
-    avionAsignado = avion;
+    m_pilotos[0] = CPiloto();
+    m_pilotos[1] = CPiloto();
+    avionAsignado = CAvion();
 }
 
-CVuelo::CVuelo(string origen, string destino, int id, int Duracion, int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion){
+CVuelo::CVuelo(CCadena origen, CCadena destino, int id, int Duracion, int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion){
     m_origen = origen;
     m_destino = destino;
     m_IDVuelo = id;

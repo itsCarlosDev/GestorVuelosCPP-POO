@@ -1,13 +1,15 @@
-// HELPED BY AI (CHATGPT)
+// HELPED BY AI
 
 #ifndef CARRAYDINAMICO_H
 #define CARRAYDINAMICO_H
 
 #include <vector> // Implementa un array dinamico
 // Permite gestionar la memoria de manera dinamica y usar new y delete
+#include <stdexcept>  // std::out_of_range
+#include <cstddef>    // std::size_t, std::ptrdiff_t
+
 
 /* Funciones que añade <vector>*/
-
 // push_back(x) → mete un elemento al final.
 // erase(it) → borra el elemento en la posición del iterador.
 // at(i) → accede al elemento en posición i y comprueba rango.
@@ -19,24 +21,24 @@
 template <typename T>
 class CArrayDinamico
 {
-public:
-    // recogemos referencia constante al objeto (para añadir al array)
-    void anadir(const T& elem);
-    void eliminar(int pos);
-    T obtener(int pos);
-    int tamano(); // Sin la Ñ ya que puede dar problemas de compilación
+    public:
+        // recogemos referencia constante al objeto (para añadir al array)
+        void anadir(const T& elem);
+        void eliminar(int pos);
+        T obtener(int pos);
+        size_t tamano();
 
-private:
-    vector<T> elementos; // Creacion del array dinamico
+    private:
+        std::vector<T> elementos; // Creacion del array dinamico
 
 };
 
 #endif
 
 template <typename T>
-int CArrayDinamico<T>::tamano()
+size_t CArrayDinamico<T>::tamano()
 {
-    return size(elementos);
+    return elementos.size();
 }
 
 template <typename T>
@@ -49,6 +51,7 @@ template <typename T>
 void CArrayDinamico<T>::eliminar(int pos)
 {
     elementos.erase(pos);
+    return
 }
 
 template <typename T>

@@ -11,13 +11,12 @@
 
 using namespace std;
 
-// Created by AI (ChatGPT)
+// Created by AI
 void esperar(int segundos) {
     std::this_thread::sleep_for(std::chrono::seconds(segundos));
 }
 
 void mostrarMenu() {
-    // Los vuelos actualmente funcionan con un array estatico
     cout << "\n=== GESTOR DE VUELOS ===\n";
     cout << "\n1. Añadir vuelo\n";
     cout << "2. Eliminar vuelo\n";
@@ -27,17 +26,16 @@ void mostrarMenu() {
     cout << "6. Ordenar por precio\n";
     cout << "7. Ordenar por duracion\n";
 
-    // Los pilotos funcionan con un array reservado
     cout << "\n=== GESTOR DE PILOTOS ===\n";
     cout << "\n8. Añadir Piloto\n";
     cout << "9. Mostrar Pilotos\n";
     //cout << "10. Eliminar piloto\n";
     //cout << "11. Modificar piloto por DNI\n";
 
-    /*cout << "\n=== GESTOR DE CLIENTES ===\n";
+    cout << "\n=== GESTOR DE CLIENTES ===\n";
     cout << "\n8. Añadir Pasajero\n";
     cout << "9. Eliminar pasajero\n";
-    cout << "10. Modificar pasajero por DNI\n";*/
+    cout << "10. Modificar pasajero por DNI\n";
 
     cout << "\n=== GESTOR DE AVIONES ===\n";
     cout << "\n12. Añadir Avion\n";
@@ -72,27 +70,33 @@ int main(int argc, char const *argv[])
             case 1: {
 
                 if(pilotos.getPilotos() >= 2){
-                    cout << "\n-> Has seleccionado Añadir vuelo\n";
-                    
-                    /* Entrada de datos sobre el vuelo. */
+
                     int id, dur, prec;
-                    string origen, destino;
-                    cout << "\nIntroduce el ID del vuelo: ";
-                    cin >> id;
-                    cout << "Coloca el origen del vuelo: ";
-                    cin >> origen;
-                    cout << "Coloca el destino del vuelo: ";
-                    cin >> destino;
-                    cout << "Introduce la duración (minutos): ";
-                    cin >> dur;
-                    cout << "Introduce el precio: ";
-                    cin >> prec;
-
+                    CCadena origen, destino;
                     int idAvion, idPiloto1, idPiloto2, maxPasajeros;
-
-                    /* Asignacion de pilotos al vuelo */
                     bool encontradoUno = false;
                     CPiloto piloto1;
+                    bool encontradoDos = false;
+                    CPiloto piloto2;
+                    bool encontradoTres = false;
+                    CAvion avion;
+
+                    cout << "\n-> Has seleccionado Añadir vuelo\n";
+
+                    cout << "\nIntroduce el ID del vuelo: ";
+                    cin >> id;
+
+                    cout << "Coloca el origen del vuelo: ";
+                    cin >> origen;
+
+                    cout << "Coloca el destino del vuelo: ";
+                    cin >> destino;
+
+                    cout << "Introduce la duración (minutos): ";
+                    cin >> dur;
+
+                    cout << "Introduce el precio: ";
+                    cin >> prec;
 
                     do
                     {
@@ -108,9 +112,6 @@ int main(int argc, char const *argv[])
                         }
                     } while (encontradoUno == false);
 
-                    bool encontradoDos = false;
-                    CPiloto piloto2;
-
                     do
                     {
                         cout << "Indica el ID del 2º piloto: ";
@@ -124,12 +125,6 @@ int main(int argc, char const *argv[])
                             encontradoDos = false;
                         }
                     } while (encontradoDos == false);
-
-                    cout << "Indica el ID del avion asignado: ";
-                    cin >> idAvion;
-
-                    bool encontradoTres = false;
-                    CAvion avion;
 
                     do
                     {
@@ -145,10 +140,17 @@ int main(int argc, char const *argv[])
                         }
                     } while (encontradoTres == false);
 
-                    CVuelo vuelo(origen, destino, id, dur, prec, maxPasajeros, piloto1, piloto2, avion);
+                    CVuelo vuelo(origen, destino, id, dur, prec, maxPasajeros, 
+                                piloto1, piloto2, avion);
 
-                    /* Creacion del vuelo */
-                    if(gestor.crearVuelo(vuelo)){ cout << "Creado correctamente.\n"; esperar(2); } else{ cout << "Se ha alcanzado el maximo de vuelos posible.\n"; esperar(2);};
+                    if(gestor.crearVuelo(vuelo))
+                    { 
+                        cout << "Creado correctamente.\n"; 
+                        esperar(2); 
+                    } else { 
+                        cout << "Se ha alcanzado el maximo de vuelos posible.\n"; 
+                        esperar(2);
+                    };
                 
                 } else {
                     cout << "Para la creacion de vuelos es necesario haber creado antes 2 pilotos minimo.\n";

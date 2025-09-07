@@ -76,3 +76,6 @@ Trabajo desarrollado para practica universitaria.
 
 **v0.5.1 -> Quinta subida, cosas a tener en cuenta**
     - Mejoras varias de errores y warnings por consola
+
+**v0.5.2 -> Sexta subida, cosas a tener en cuenta**
+    - 
