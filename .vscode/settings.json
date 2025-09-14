@@ -2,6 +2,7 @@
     "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
     "makefile.makePath": "mingw32-make",
     "files.associations": {
+        "*.s": "asm",
         "iostream": "cpp",
         "type_traits": "cpp",
         "iosfwd": "cpp",
@@ -57,7 +58,9 @@
         "stop_token": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "fstream": "cpp",
+        "list": "cpp"
     },
     "CodeGPT.apiKey": "Ollama"
 }

@@ -5,7 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "Debug (macOS, LLDB)",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/main",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "stdio": [],
+            "preLaunchTask": "Build"
+        },
+        {
+            "name": "Debug (Windows, gdb)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/main.exe",
@@ -13,7 +24,7 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": false,
+            "console": "integratedTerminal",
             "MIMode": "gdb",
             "miDebuggerPath": "gdb.exe",
             "setupCommands": [
@@ -28,7 +39,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "run the makefile"
+            "preLaunchTask": "Build"
         }
     ]
 }

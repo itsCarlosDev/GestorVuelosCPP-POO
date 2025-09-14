@@ -1,5 +1,13 @@
 
-#include "CVuelo.h";
+/**
+ * FITXER: CVuelo.cpp
+ * AUTOR: Carlos Morales
+ * DATA: 13/09/2025
+ * VERSIO: 6.0
+ * Descripció: Contiene los datos de los vuelos
+ */
+
+#include "./headers/CVuelo.h";
 
 CVuelo::CVuelo()
 {
@@ -12,7 +20,8 @@ CVuelo::CVuelo()
     avionAsignado = CAvion();
 }
 
-CVuelo::CVuelo(CCadena origen, CCadena destino, int id, int Duracion, int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion){
+CVuelo::CVuelo(CCadena origen, CCadena destino, int id, int Duracion, 
+                int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion){
     m_origen = origen;
     m_destino = destino;
     m_IDVuelo = id;

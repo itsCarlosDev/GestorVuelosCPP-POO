@@ -1,0 +1,52 @@
+
+
+// Recursividad: lo que hace la Recursividad es separar la solucion en varias soluciones mas simples
+
+Variables → camelCase, empiezan minúscula: nomAlumne.
+Funciones → verbos en camelCase: calculaMitja().
+Clases/Tipos → Mayúscula inicial: class Alumne.
+Constantes → MAYÚSCULAS con _: NOMBRE_MAXIM.
+Atributos privados → m_ delante: m_nomAlumne.
+Variables globales → ::variable.
+
+En punteros → char* nom, no char *nom.
+
+Funciones
+Si recibe objetos → por referencia (const& si no los modifica).
+
+Bucles
+NO usar goto, continue, break (salvo en switch).
+
+Clases
+- Orden → public primero, luego private.
+- Siempre un constructor por defecto.
+- Inicialización de atributos → lista en constructor:
+MyClass(int v) : m_value(v) {}
+
+
+Comentarios
+Al inicio de cada fichero:
+/**
+ * FITXER: Avio.cpp
+ * AUTOR: Carlos Morales
+ * DATA: 13/09/2025
+ * VERSIO: 1.0
+ * Descripció: Implementació de la classe Avio.
+ */
+
+
+Antes de cada función:
+/**
+ * calculaMitja
+ * Calcula la mitjana de dos nombres reals.
+ * @param x primer nombre
+ * @param y segon nombre
+ * @return mitjana dels dos
+ */
+
+
+Antes de cada clase:
+/**
+ * CLASS Avio
+ * Representa un avió amb codi, model i capacitat.
+ */

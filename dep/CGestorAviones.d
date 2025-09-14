@@ -1,2 +1,11 @@
-obj/CGestorAviones.o: src/CGestorAviones.cpp src/CGestorAviones.h \
- src/CAvion.h src/CPasajero.h src/CPersona.h src/CCadena.h src/CClase.h
+obj/CGestorAviones.o: src/CGestorAviones.cpp \
+ src/./headers/CGestorAviones.h src/./headers/CAvion.h \
+ src/./headers/CPasajero.h src/./headers/CPersona.h \
+ src/./headers/CCadena.h src/./headers/CClase.h src/./headers/CAvion.h
+src/./headers/CGestorAviones.h:
+src/./headers/CAvion.h:
+src/./headers/CPasajero.h:
+src/./headers/CPersona.h:
+src/./headers/CCadena.h:
+src/./headers/CClase.h:
+src/./headers/CAvion.h:

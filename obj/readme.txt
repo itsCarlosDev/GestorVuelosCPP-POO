@@ -1,2 +1,0 @@
-En aquest directori, per cada arxiu de codi font (*.cpp) del projecte es generarà un fitxer objecte (*.o).
-Combinant tots els fitxers objecte del projecte es construeix un únic executable, que és el programa resultant de tot el codi.

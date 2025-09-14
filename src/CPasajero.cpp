@@ -1,5 +1,5 @@
 
-#include "CPasajero.h"
+#include "./headers/CPasajero.h"
 
 CPasajero& CPasajero::operator=(const CPasajero& copia){
     if(this != &copia){

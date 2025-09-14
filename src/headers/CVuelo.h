@@ -10,10 +10,11 @@ class CVuelo
     public:
         
         CVuelo();
-        CVuelo(CCadena origen, CCadena destino ,int id, int Duracion, int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion); // Constructor con parametros
+        CVuelo(CCadena origen, CCadena destino ,int id, int Duracion, int Precio, 
+                int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion);
 
         /* Getter's */
-        int getId(){ return m_IDVuelo; }
+        int getId(){ return m_IDVuelo; } // Código inline
         int getDuracion(){ return m_duracion; }
         int getPrecio(){ return m_precio; }
 

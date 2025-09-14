@@ -1,12 +1,66 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
+            "label": "Build",
             "type": "shell",
+            "command": "make",
+            "args": ["-f", "Makefile_Portable"],
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": ["$gcc"],
+            "windows": {
+                "command": "mingw32-make.exe",
+                "args": ["-f", "Makefile_Portable", "all"]
+            },
+            "osx": {
+                "command": "make",
+                "args": ["-f", "Makefile_Portable"]
+            },
+            "linux": {
+                "command": "make",
+                "args": ["-f", "Makefile_Portable"]
+            }
+        },
+        {
             "label": "run the makefile",
-            "command": "mingw32-make.exe",
-            "args": ["main.exe"],
+            "type": "shell",
+            "command": "make",
+            "args": ["-f", "Makefile_Portable"],
+            "group": { "kind": "build" },
+            "problemMatcher": ["$gcc"],
+            "windows": {
+                "command": "mingw32-make.exe",
+                "args": ["-f", "Makefile_Portable", "all"]
+            },
+            "osx": {
+                "command": "make",
+                "args": ["-f", "Makefile_Portable"]
+            },
+            "linux": {
+                "command": "make",
+                "args": ["-f", "Makefile_Portable"]
+            }
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "./main",
+            "dependsOn": "Build",
             "problemMatcher": [],
+            "windows": {
+                "command": ".\\main.exe"
+            }
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "make",
+            "args": ["-f", "Makefile_Portable", "distclean"],
+            "problemMatcher": [],
+            "windows": {
+                "command": "mingw32-make.exe",
+                "args": ["-f", "Makefile_Portable", "distclean"]
+            }
         }
-    ],
-    "version": "2.0.0"
+    ]
 }

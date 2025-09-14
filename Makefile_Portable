@@ -1,0 +1,113 @@
+# Makefile_Portable: único Makefile para macOS y Windows (MSYS2)
+#
+# USO RÁPIDO
+# - Compilar:         make -f Makefile_Portable
+# - Limpiar objetos:  make -f Makefile_Portable clean
+# - Limpiar total:    make -f Makefile_Portable distclean
+# - Recompilar:       make -f Makefile_Portable rebuild
+# - Ejecutar:         make -f Makefile_Portable run
+#
+# QUE EDITAR EN OTROS PROYECTOS (EDIT ME):
+# - APPNAME   : nombre del ejecutable base (sin .exe)
+# - SRCDIR    : carpeta donde están los .cpp
+# - HDRDIR    : carpeta con los headers (se añade con -I)
+# - EXT       : extensión de los fuentes (normalmente .cpp)
+# - CXXFLAGS  : flags del compilador (ajusta el estándar/optimizaciones)
+
+########################## PROYECTO (EDIT ME) ##########################
+# Edita estos valores para tu proyecto.
+APPNAME := main
+EXT     := .cpp
+SRCDIR  := src
+HDRDIR  := $(SRCDIR)/headers
+OBJDIR  := obj
+DEPDIR  := dep
+CXXSTD  := -std=c++14
+CXXWARN := -Wall -Wextra
+CXXOPT  := -O2
+#######################################################################
+
+# Detección de OS para la extensión del ejecutable
+ifeq ($(OS),Windows_NT)
+    EXE := .exe
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        EXE :=
+    else
+        EXE :=
+    endif
+endif
+
+# Compilador por defecto: usa clang++ en macOS, g++ en otros
+ifeq ($(UNAME_S),Darwin)
+    CXX ?= clang++
+else
+    CXX ?= g++
+endif
+
+CXXFLAGS := $(CXXSTD) $(CXXWARN) $(CXXOPT)
+LDFLAGS  :=
+
+INCLUDES := -I$(HDRDIR)
+
+# Fuentes, objetos y dependencias (plano: $(SRCDIR)/*.cpp)
+SRC := $(wildcard $(SRCDIR)/*$(EXT))
+OBJ := $(patsubst $(SRCDIR)/%$(EXT),$(OBJDIR)/%.o,$(SRC))
+DEP := $(patsubst $(OBJDIR)/%.o,$(DEPDIR)/%.d,$(OBJ))
+
+# Depfiles: -MMD -MP evita recompilaciones innecesarias y roturas por headers eliminados
+DEPFLAGS := -MMD -MP
+
+BINARY := $(APPNAME)$(EXE)
+
+.PHONY: all clean distclean rebuild run dirs
+
+all: $(BINARY)
+
+$(BINARY): $(OBJ) | dirs
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Regla de compilación con generación de dependencias por archivo
+$(OBJDIR)/%.o: $(SRCDIR)/%$(EXT) | dirs
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(DEPFLAGS) -MF $(DEPDIR)/$*.d -c $< -o $@
+
+# Incluir dependencias si existen
+-include $(DEP)
+
+# Directorios y limpieza portables por SO
+ifeq ($(OS),Windows_NT)
+dirs:
+	@if not exist "$(OBJDIR)" mkdir "$(OBJDIR)"
+	@if not exist "$(DEPDIR)" mkdir "$(DEPDIR)"
+
+clean:
+	@if exist "$(OBJDIR)" rmdir /S /Q "$(OBJDIR)"
+	@if exist "$(DEPDIR)" rmdir /S /Q "$(DEPDIR)"
+
+distclean: clean
+	@if exist "$(BINARY)" del /Q "$(BINARY)"
+
+run: $(BINARY)
+	$(BINARY)
+else
+dirs:
+	@mkdir -p "$(OBJDIR)" "$(DEPDIR)"
+
+clean:
+	rm -rf "$(OBJDIR)" "$(DEPDIR)"
+
+distclean: clean
+	rm -f "$(BINARY)"
+
+run: $(BINARY)
+	./$(BINARY)
+endif
+
+rebuild: distclean all
+
+# Compilación cruzada opcional desde macOS a Windows (requiere mingw-w64)
+.PHONY: win
+WIN_CXX := x86_64-w64-mingw32-g++
+win:
+	$(WIN_CXX) $(CXXSTD) $(CXXWARN) $(CXXOPT) $(INCLUDES) $(SRC) -o $(APPNAME).exe

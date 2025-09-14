@@ -1,8 +1,19 @@
 
-#include "CPiloto.h"
+/**
+ * FITXER: CPiloto.cpp
+ * AUTOR: Carlos Morales
+ * DATA: 13/09/2025
+ * VERSIO: 6.0
+ * Descripció: Contiene los datos de los pilotos y esta heredado de CPersona
+ */
+
+#include "./headers/CPiloto.h"
 
 // this sirve para indicar si por ejemplo a = b
 // si a es diferente de b (this es a, b es el objeto copia)
+
+// Constructor por defecto necesario para arrays y objetos sin inicializar
+CPiloto::CPiloto() : CPersona(), m_IDPiloto(0), m_experiencia(0) {}
 
 CPiloto& CPiloto::operator=(const CPiloto& copia){
     if (this != &copia) { // Evitar auto‑asignación

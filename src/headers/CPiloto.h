@@ -3,13 +3,16 @@
 #define CPILOTO_H
 
 #include "CPersona.h"
+#include <ostream> // se utiliza en el friend
 
 class CPiloto : public CPersona
 {
     public:
 
     // Constructor por defecto
-    CPiloto() : m_IDPiloto(0), m_experiencia(0) {}
+    CPiloto();
+    CPiloto(int dni, CCadena& nombre, int experiencia, int id)
+        : CPersona(nombre, dni), m_experiencia(experiencia), m_IDPiloto(id) {}
 
     /* Getters y Setters */
     int getExperiencia(){ return m_experiencia; }
@@ -20,7 +23,7 @@ class CPiloto : public CPersona
     CPiloto& operator=(const CPiloto& copia);
     // Colocar friend delante del operador permite 
     // acceder a los datos privados
-    friend ostream& operator<<(std::ostream& out, const CPiloto& piloto);
+    friend std::ostream& operator<<(std::ostream& out, const CPiloto& piloto);
 
     private:
         int m_IDPiloto;

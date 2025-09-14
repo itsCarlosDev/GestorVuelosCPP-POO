@@ -1,1 +1,0 @@
-Directori on es mantenen les dependències entre fitxers. Els arxius de dependències indiquen l'acoblament entre arxius. A partir de la informació que contenen, el compilador determina quina arxius .cpp cal recompilar, en base a si els arxius dels que depèn han sofert canvis.

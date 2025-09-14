@@ -22,6 +22,9 @@ class CGestorPilotos
         int getPilotos(){ return m_numPilotosActuales; }
         void setPlantilla(int num){ m_numPlantilla = num; }
 
+        // Sobrecarga de operadores para E/S
+        friend ostream& operator<<(ostream& out, const CGestorPilotos& gestor);
+
     private:
         CPiloto* m_piloto;
         int m_numPlantilla;
