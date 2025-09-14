@@ -8,7 +8,7 @@
 #include <string.h>
 
 // Custom headers
-#include "CCadena.h"
+#include "./headers/CCadena.h"
 
 // class constructor
 CCadena::CCadena()

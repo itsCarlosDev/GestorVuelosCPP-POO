@@ -1,6 +1,6 @@
 
-#include "CGestorAviones.h"
-#include "CAvion.h"
+#include "./headers/CGestorAviones.h"
+#include "./headers/CAvion.h"
 
 CGestorAviones::CGestorAviones(int numMax){
     if(numMax > 0){
@@ -14,7 +14,6 @@ CGestorAviones::CGestorAviones(int numMax){
 CGestorAviones::~CGestorAviones(){
     delete m_aviones;
 }
-
 
 bool CGestorAviones::crearAvion(int id, int maxPasajeros){
     CAvion avion;

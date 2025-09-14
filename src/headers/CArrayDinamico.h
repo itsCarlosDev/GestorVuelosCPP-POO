@@ -1,5 +1,5 @@
 // HELPED BY AI
-
+/*
 #ifndef CARRAYDINAMICO_H
 #define CARRAYDINAMICO_H
 
@@ -7,7 +7,6 @@
 // Permite gestionar la memoria de manera dinamica y usar new y delete
 #include <stdexcept>  // std::out_of_range
 #include <cstddef>    // std::size_t, std::ptrdiff_t
-
 
 /* Funciones que añade <vector>*/
 // push_back(x) → mete un elemento al final.
@@ -17,7 +16,7 @@
 // size() → cuántos elementos tiene ahora.
 // capacity() → cuánta memoria reservada tiene (puede ser mayor que size).
 // clear() → borra todos los elementos.
-
+/*
 template <typename T>
 class CArrayDinamico
 {
@@ -59,3 +58,4 @@ T CArrayDinamico<T>::obtener(int pos)
 {
     elementos.at(pos);
 }
+*/

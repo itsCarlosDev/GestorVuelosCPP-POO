@@ -1,2 +1,3 @@
-obj/CGestorPasajeros.o: src/CGestorPasajeros.cpp src/CGestorPasajeros.h \
- src/CPasajero.h src/CPersona.h src/CCadena.h src/CClase.h
+obj/CGestorPasajeros.o: src/CGestorPasajeros.cpp \
+ src/./headers/CGestorPasajeros.h src/./headers/CPasajero.h \
+ src/./headers/CPersona.h src/./headers/CCadena.h src/./headers/CClase.h

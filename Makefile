@@ -4,8 +4,8 @@
 
 # Compiler settings - Can be customized.
 CC = g++
-CXXFLAGS = -g -std=c++11 -Wall
-LDFLAGS = 
+CXXFLAGS = -g -std=c++14 -Wall # Universidad utiliza compilador ver.14
+LDFLAGS =
 
 # Makefile settings - Can be customized.
 APPNAME = main.exe
@@ -13,6 +13,8 @@ EXT = .cpp
 SRCDIR = src
 OBJDIR = obj
 DEPDIR = dep
+HDRDIR = $(SRCDIR)/headers
+INCLUDES = -I$(HDRDIR)
 
 ############## Do not change anything from here downwards! #############
 SRC = $(wildcard $(SRCDIR)/*$(EXT))
@@ -35,19 +37,29 @@ WDELDEP = $(SRC:$(SRCDIR)/%$(EXT)=$(DEPDIR)\\%.d)
 all: $(APPNAME)
 
 # Builds the app
-$(APPNAME): $(OBJ)
+$(APPNAME): $(OBJ) | dirs
 	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Creates the dependecy rules
-$(DEPDIR)/%.d: $(SRCDIR)/%$(EXT)
-	@$(CPP) $(CFLAGS) $< -MM -MT $(@:$(DEPDIR)/%.d=$(OBJDIR)/%.o) >$@
+$(DEPDIR)/%.d: $(SRCDIR)/%$(EXT) | dirs
+	@$(CC) $(CXXFLAGS) $(INCLUDES) $< -MM -MT $(@:$(DEPDIR)/%.d=$(OBJDIR)/%.o) > $@
 
 # Includes all .h files
 -include $(DEP)
 
 # Building rule for .o files and its .c/.cpp in combination with all .h
-$(OBJDIR)/%.o: $(SRCDIR)/%$(EXT)
-	$(CC) $(CXXFLAGS) -o $@ -c $<
+$(OBJDIR)/%.o: $(SRCDIR)/%$(EXT) | dirs
+	$(CC) $(CXXFLAGS) $(INCLUDES) -o $@ -c $<
+
+.PHONY: dirs
+ifeq ($(OS),Windows_NT)
+dirs:
+	@if not exist "$(OBJDIR)" mkdir "$(OBJDIR)"
+	@if not exist "$(DEPDIR)" mkdir "$(DEPDIR)"
+else
+dirs:
+	@mkdir -p $(OBJDIR) $(DEPDIR)
+endif
 
 ################### Cleaning rules for Unix-based OS ###################
 # Cleans complete project

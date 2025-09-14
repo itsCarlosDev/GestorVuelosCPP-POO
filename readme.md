@@ -77,5 +77,9 @@ Trabajo desarrollado para practica universitaria.
 **v0.5.1 -> Quinta subida, cosas a tener en cuenta**
     - Mejoras varias de errores y warnings por consola
 
-**v0.5.2 -> Sexta subida, cosas a tener en cuenta**
-    - 
+**v0.6 -> Sexta subida, cosas a tener en cuenta**
+    - Mejora de makefile y la distribución de los archivos
+    - Uso de archivos para CPiloto con <fstream>
+    - Deshabiltar el uso del array reservado dinamico (próximamente reactivación)
+    - Cambios por AI del makefile (necesarios para mejorar la distribucion de los archivos)
+    - Ahora los pilotos se recogen de un txt

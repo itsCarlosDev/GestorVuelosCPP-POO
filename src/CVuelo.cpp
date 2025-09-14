@@ -1,5 +1,5 @@
 
-#include "CVuelo.h";
+#include "./headers/CVuelo.h";
 
 CVuelo::CVuelo()
 {
@@ -12,7 +12,8 @@ CVuelo::CVuelo()
     avionAsignado = CAvion();
 }
 
-CVuelo::CVuelo(CCadena origen, CCadena destino, int id, int Duracion, int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion){
+CVuelo::CVuelo(CCadena origen, CCadena destino, int id, int Duracion, 
+                int Precio, int maxPasajeros, CPiloto piloto1, CPiloto piloto2, CAvion avion){
     m_origen = origen;
     m_destino = destino;
     m_IDVuelo = id;

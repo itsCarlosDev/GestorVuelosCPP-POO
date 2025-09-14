@@ -1,1 +1,2 @@
-obj/CPersona.o: src/CPersona.cpp src/CPersona.h src/CCadena.h
+obj/CPersona.o: src/CPersona.cpp src/./headers/CPersona.h \
+ src/./headers/CCadena.h

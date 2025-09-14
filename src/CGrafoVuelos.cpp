@@ -9,7 +9,7 @@
 // capacity() → cuánta memoria reservada tiene (puede ser mayor que size).
 // clear() → borra todos los elementos.
 
-#include "CGrafoVuelos.h"
+#include "./headers/CGrafoVuelos.h"
 
 bool CGrafoVuelos::añadirVuelo(const CVuelo& vuelo, int tiempoVuelo)
 {

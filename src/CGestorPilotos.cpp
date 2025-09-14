@@ -1,9 +1,11 @@
 
-#include "CGestorPilotos.h"
-#include "CPiloto.h"
-#include "CPersona.h"
+#include "./headers/CGestorPilotos.h"
+#include "./headers/CPiloto.h"
+#include "./headers/CPersona.h"
 
 CGestorPilotos::CGestorPilotos(int maxPilotos){
+    m_numPlantilla = maxPilotos;
+    m_numPilotosActuales = 0;
     if (maxPilotos > 0){
         m_piloto = new CPiloto[maxPilotos];
     } else {
@@ -21,11 +23,10 @@ bool CGestorPilotos::crearPiloto(const CCadena& nombre, int dni, int experiencia
     CPersona persona;
 
     if(m_numPilotosActuales < m_numPlantilla){
-        persona.setDNI(dni);
-        persona.setNombre(nombre);
 
         piloto.setExperiencia(experiencia);
-        piloto.setPersona(persona);
+        piloto.setNombre(nombre);
+        piloto.setDNI(dni);
         piloto.setID(ID);
 
         m_piloto[m_numPilotosActuales] = piloto;

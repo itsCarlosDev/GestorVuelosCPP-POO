@@ -1,8 +1,11 @@
 
-#include "CPiloto.h"
+#include "./headers/CPiloto.h"
 
 // this sirve para indicar si por ejemplo a = b
 // si a es diferente de b (this es a, b es el objeto copia)
+
+// Constructor por defecto necesario para arrays y objetos sin inicializar
+CPiloto::CPiloto() : CPersona(), m_IDPiloto(0), m_experiencia(0) {}
 
 CPiloto& CPiloto::operator=(const CPiloto& copia){
     if (this != &copia) { // Evitar auto‑asignación

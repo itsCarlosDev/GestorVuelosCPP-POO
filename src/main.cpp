@@ -1,24 +1,76 @@
 
-#include "CVuelo.h"
-#include "CGestorVuelos.h"
-#include "CPersona.h"
-#include "CPasajero.h"
-#include "CGestorPilotos.h"
-#include "CGestorAviones.h"
+/**
+ * FITXER: main.cpp
+ * AUTOR: Carlos Morales
+ * DATA: 13/09/2025
+ * VERSIO: 6.0
+ * Descripció: Mostrar el menu y ejecutar todos los comandos necesarios
+ */
+
+#include <fstream> // include para hacer lectura/escritura de archivos
 #include <iostream>
 #include <thread>   // std::this_thread::sleep_for
 #include <chrono>   // std::chrono::seconds, std::chrono::milliseconds
 
+#include "./headers/CVuelo.h"
+#include "./headers/CGestorVuelos.h"
+#include "./headers/CPersona.h"
+#include "./headers/CPasajero.h"
+#include "./headers/CGestorPilotos.h"
+#include "./headers/CGestorAviones.h"
+
 using namespace std;
+
+/* Se utilizan sobrecargas de operadores porque utilizamos colecciones como CGestorPilotos */
+
+//Sobrecarga del operador de escritura de ficheros (genérico)
+ostream& operator<<(ostream& output, const CGestorPilotos& gestor){
+    for (int i = 0; i < gestor.m_numPilotosActuales; ++i) {
+        output << gestor.m_piloto[i] << '\n';
+    }
+    return output;
+}
+
+//Sobrecarga del operador de lectura para cargar pilotos en el gestor
+// Lee: ID Nombre Apellido DNI Experiencia por línea
+istream& operator>>(istream& input, CGestorPilotos& gestor) {
+    int id, dni, experiencia;
+    CCadena nombre, apellido;
+    while (input >> id >> nombre >> apellido >> dni >> experiencia) {
+        CCadena completo = nombre + CCadena(" ") + apellido;
+        gestor.crearPiloto(completo, dni, experiencia, id);
+    }
+    return input;
+}
 
 // Created by AI
 void esperar(int segundos) {
     std::this_thread::sleep_for(std::chrono::seconds(segundos));
 }
 
+void animacionPuntos(const std::string& prefix, int ciclos = 9, int delay_ms = 200) {
+    static const char* estados[] = {".", "..", "..."};
+    for (int i = 0; i < ciclos; ++i) {
+        std::cout << "\r" << prefix << estados[i % 3] << "   " << std::flush;
+        std::this_thread::sleep_for(std::chrono::milliseconds(delay_ms));
+    }
+    // Limpia/restaura la línea al final
+    std::cout << "\r" << prefix << "...   " << std::endl;
+}
+
+////////////////
+
+/**
+ * calculaMitja
+ * Calcula la mitjana de dos nombres reals.
+ * @param x primer nombre
+ * @param y segon nombre
+ * @return mitjana dels dos
+ */
 void mostrarMenu() {
+    std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
     cout << "\n=== GESTOR DE VUELOS ===\n";
-    cout << "\n1. Añadir vuelo\n";
+    cout << "\n. Añadir vuelo\n";
     cout << "2. Eliminar vuelo\n";
     cout << "3. Modificar vuelo por ID\n";
     cout << "4. Mostrar vuelos actuales\n";
@@ -27,10 +79,8 @@ void mostrarMenu() {
     cout << "7. Ordenar por duracion\n";
 
     cout << "\n=== GESTOR DE PILOTOS ===\n";
-    cout << "\n8. Añadir Piloto\n";
+    cout << "\n8. Actualizar Pilotos\n";
     cout << "9. Mostrar Pilotos\n";
-    //cout << "10. Eliminar piloto\n";
-    //cout << "11. Modificar piloto por DNI\n";
 
     cout << "\n=== GESTOR DE CLIENTES ===\n";
     cout << "\n8. Añadir Pasajero\n";
@@ -40,7 +90,6 @@ void mostrarMenu() {
     cout << "\n=== GESTOR DE AVIONES ===\n";
     cout << "\n12. Añadir Avion\n";
     cout << "13. Mostrar Aviones\n";
-    //cout << "16. Modificar piloto por DNI\n";
 
     cout << "\n0. Salir\n";
     cout << "\nSelecciona una opción: ";
@@ -51,12 +100,29 @@ int main(int argc, char const *argv[])
     int opcion, plantillaPilotos, avionesTotales; // Menu selection 
     CGestorVuelos gestor;
     CPasajero pasajero;
+    std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
+    animacionPuntos("Contando pilotos actuales");
+    
+    /*Contar la cantidad de pilotos dentro del archivo*/
+    ifstream fitxer("src/files/pilotos.txt");
+    string linea;
+    int contador = 0;
+    if (fitxer) {
+        while (getline(fitxer, linea)) {   // lee cada línea completa
+            contador++;
+        }
+        fitxer.close();
+    } else {
+        cout << "No se ha encontrado el archivo. ";
+    }
+    std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
+    cout << "Se han encontrado un total de: " << contador;
+    esperar(2);
+    std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
 
-    /* Apartado nuevo para declarar el array reservado de pilotos en plantilla */
-    cout << "Introduce el numero de plantilla de Pilotos del Aeropuerto: ";
-    cin >> plantillaPilotos;
-    CGestorPilotos pilotos(plantillaPilotos);
-
+    /*Necesita el constructor el numero de 
+    pilotos para crear el array reservado*/
+    CGestorPilotos pilotos(contador);
     cout << "Introduce el numero de aviones que caben en el aeropuerto: ";
     cin >> avionesTotales;
     CGestorAviones aviones(avionesTotales);
@@ -67,6 +133,7 @@ int main(int argc, char const *argv[])
 
         // The keys {} are to close each case for the variation independence.
         switch (opcion) {
+            /*Apartado de Vuelos*/
             case 1: {
 
                 if(pilotos.getPilotos() >= 2){
@@ -184,7 +251,7 @@ int main(int argc, char const *argv[])
                     cout << "Introduce el precio: ";
                     cin >> prec;
 
-                    string origen, destino;
+                    CCadena origen, destino;
                     cout << "Coloca el origen del vuelo: ";
                     cin >> origen;
                     cout << "Coloca el destino del vuelo: ";
@@ -291,27 +358,43 @@ int main(int argc, char const *argv[])
 
                 break;
             }
+            /*Apartado de Pilotos*/
             case 8: {
-                cout << "\n-> Has seleccionado añadir pilotos\n";
+                std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
+                cout << "\n-> Has seleccionado actualizar pilotos\n";
+                cout << "\n-> Pilotos de la lista: \n";
 
-                CCadena nombre;
-                int DNI, experiencia, id;
+                ifstream fitxer("src/files/pilotos.txt"); // lectura
 
-                cout << "Indica la ID del piloto: ";
-                cin >> id;
-                cout << "Nombre del empleado: ";
-                cin >> nombre;
-                cout << "DNI del empleado: ";
-                cin >> DNI;
-                cout << "Indica la experiencia del piloto (no coloques años al final): ";
-                cin >> experiencia;
-                
-                if((pilotos.crearPiloto(nombre, DNI, experiencia, id))){ cout << "Se ha creado el piloto correctamente.\n"; esperar(2); } else{ cout << "No se pueden crear mas pilotos \n"; esperar(2);};
+                string linea;
+                int contador = 0;
+                if (fitxer) {
+                    while (getline(fitxer, linea)) {   // lee cada línea completa
+                        cout << linea;
+                        cout << "\n";
+                    }
+                    fitxer.close(); 
+                } else {
+                    cout << "No se ha encontrado el archivo. ";
+                }
+
+                esperar(2);
+
+                fitxer.open("src/files/pilotos.txt");
+                animacionPuntos("Actualizando array reservado");
+
+                if (fitxer) {
+                    fitxer >> pilotos; // usa la sobrecarga operator>>(istream&, CGestorPilotos&)
+                    fitxer.close();
+                    cout << "Pilotos actualizados.\n";
+                } else {
+                    cout << "No se ha encontrado el archivo. ";
+                }
                 esperar(2);
                 break;
             }
             case 9: {
-                cout << "\n-> Has seleccionado mostrar Pilotos\n";
+                cout << "\n-> Has seleccionado mostrar Pilotos en mémoria\n";
                 pilotos.mostrarPilotos();
                 esperar(2);
                 break;

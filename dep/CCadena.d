@@ -1,1 +1,1 @@
-obj/CCadena.o: src/CCadena.cpp src/CCadena.h
+obj/CCadena.o: src/CCadena.cpp src/./headers/CCadena.h

@@ -1,2 +1,2 @@
-obj/CPasajero.o: src/CPasajero.cpp src/CPasajero.h src/CPersona.h \
- src/CCadena.h src/CClase.h
+obj/CPasajero.o: src/CPasajero.cpp src/./headers/CPasajero.h \
+ src/./headers/CPersona.h src/./headers/CCadena.h src/./headers/CClase.h
