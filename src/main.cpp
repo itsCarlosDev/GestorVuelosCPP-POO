@@ -29,6 +29,13 @@
 #include "./headers/CGestorPilotos.h"
 #include "./headers/CGestorAviones.h"
 
+#include "./headers/CVuelo.h"
+#include "./headers/CGestorVuelos.h"
+#include "./headers/CPersona.h"
+#include "./headers/CPasajero.h"
+#include "./headers/CGestorPilotos.h"
+#include "./headers/CGestorAviones.h"
+
 using namespace std;
 
 /* Se utilizan sobrecargas de operadores porque utilizamos colecciones como CGestorPilotos */
@@ -80,6 +87,7 @@ void esperar(int segundos) {
 }
 
 void animacionPuntos(const std::string& prefix, int ciclos = 9, int delay_ms = 200) {
+<<<<<<< HEAD
     // En entornos no interactivos (Debug Console), muestra una sola vez
     if (!isInteractiveTerminal()) {
         std::cout << prefix << "..." << std::endl;
@@ -137,6 +145,15 @@ inline void clearScreen() {
         std::cout << "\x1b[H\x1b[2J\x1b[3J" << std::flush; // home + clear + clear scrollback
     }
 #endif
+=======
+    static const char* estados[] = {".", "..", "..."};
+    for (int i = 0; i < ciclos; ++i) {
+        std::cout << "\r" << prefix << estados[i % 3] << "   " << std::flush;
+        std::this_thread::sleep_for(std::chrono::milliseconds(delay_ms));
+    }
+    // Limpia/restaura la línea al final
+    std::cout << "\r" << prefix << "...   " << std::endl;
+>>>>>>> 7fe59fd07166bef4c32246d88d85878eef614e6c
 }
 
 ////////////////
@@ -149,7 +166,11 @@ inline void clearScreen() {
  * @return mitjana dels dos
  */
 void mostrarMenu() {
+<<<<<<< HEAD
     clearScreen();
+=======
+    std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
+>>>>>>> 7fe59fd07166bef4c32246d88d85878eef614e6c
     cout << "\n=== GESTOR DE VUELOS ===\n";
     cout << "\n. Añadir vuelo\n";
     cout << "2. Eliminar vuelo\n";
@@ -181,7 +202,11 @@ int main(int argc, char const *argv[])
     int opcion, plantillaPilotos, avionesTotales; // Menu selection 
     CGestorVuelos gestor;
     CPasajero pasajero;
+<<<<<<< HEAD
     clearScreen();
+=======
+    std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
+>>>>>>> 7fe59fd07166bef4c32246d88d85878eef614e6c
     animacionPuntos("Contando pilotos actuales");
     
     /*Contar la cantidad de pilotos dentro del archivo*/
@@ -196,10 +221,17 @@ int main(int argc, char const *argv[])
     } else {
         cout << "No se ha encontrado el archivo. ";
     }
+<<<<<<< HEAD
     clearScreen();
     cout << "Se han encontrado un total de: " << contador;
     esperar(2);
     clearScreen();
+=======
+    std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
+    cout << "Se han encontrado un total de: " << contador;
+    esperar(2);
+    std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
+>>>>>>> 7fe59fd07166bef4c32246d88d85878eef614e6c
 
     /*Necesita el constructor el numero de 
     pilotos para crear el array reservado*/
@@ -441,7 +473,11 @@ int main(int argc, char const *argv[])
             }
             /*Apartado de Pilotos*/
             case 8: {
+<<<<<<< HEAD
                 clearScreen();
+=======
+                std::cout << "\x1b[2J\x1b[H" << std::flush; // Created by AI
+>>>>>>> 7fe59fd07166bef4c32246d88d85878eef614e6c
                 cout << "\n-> Has seleccionado actualizar pilotos\n";
                 cout << "\n-> Pilotos de la lista: \n";
 

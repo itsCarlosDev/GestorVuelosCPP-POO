@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 /**
  * FITXER: CPiloto.cpp
  * AUTOR: Carlos Morales
@@ -7,6 +8,8 @@
  * Descripció: Contiene los datos de los pilotos y esta heredado de CPersona
  */
 
+=======
+>>>>>>> 7fe59fd07166bef4c32246d88d85878eef614e6c
 #include "./headers/CPiloto.h"
 
 // this sirve para indicar si por ejemplo a = b

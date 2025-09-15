@@ -82,8 +82,12 @@ Trabajo desarrollado para practica universitaria.
     - Uso de archivos para CPiloto con <fstream>
     - Deshabiltar el uso del array reservado dinamico (próximamente reactivación)
     - Cambios por AI del makefile (necesarios para mejorar la distribucion de los archivos)
+<<<<<<< HEAD
     - Ahora los pilotos se recogen de un txt
   
 **V0.6.1 - V0.6.2 -> Septima subida, cosas a tener en cuenta**
     - Modificacion del main con AI para borrar la consola de windows y MacOS
     - Modificacion del Makefile para compartir el makefile entre Windows y MacOS
+=======
+    - Ahora los pilotos se recogen de un txt
+>>>>>>> 7fe59fd07166bef4c32246d88d85878eef614e6c
