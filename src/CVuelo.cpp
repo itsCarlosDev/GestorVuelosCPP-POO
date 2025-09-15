@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 /**
  * FITXER: CVuelo.cpp
  * AUTOR: Carlos Morales
@@ -8,9 +7,7 @@
  * Descripció: Contiene los datos de los vuelos
  */
 
-=======
->>>>>>> 7fe59fd07166bef4c32246d88d85878eef614e6c
-#include "./headers/CVuelo.h";
+#include "./headers/CVuelo.h"
 
 CVuelo::CVuelo()
 {
@@ -49,3 +46,4 @@ ostream& operator<<(std::ostream& out, const CVuelo& vuelo)
         ;
     return out;
 }
+
